@@ -1,0 +1,74 @@
+erDiagram
+
+    USER {
+        int user_id
+        string username
+        string password
+        string full_name
+        string role
+    }
+
+    CATEGORY {
+        int category_id
+        string category_name
+        string description
+    }
+
+    SUPPLIER {
+        int supplier_id
+        string supplier_name
+        string contact_number
+        string address
+        string email
+    }
+
+    PRODUCT {
+        int product_id
+        int category_id
+        int supplier_id
+        string product_name
+        float price
+        int stock_quantity
+    }
+
+    PURCHASE {
+        int purchase_id
+        int supplier_id
+        int user_id
+        date purchase_date
+        float total_amount
+    }
+
+    PURCHASE_ITEM {
+        int purchase_item_id
+        int purchase_id
+        int product_id
+        int quantity
+        float cost_price
+    }
+
+    SALE {
+        int sale_id
+        int user_id
+        date sale_date
+        float total_amount
+    }
+
+    SALE_ITEM {
+        int sale_item_id
+        int sale_id
+        int product_id
+        int quantity
+        float selling_price
+    }
+
+    CATEGORY ||--o{ PRODUCT : contains
+    SUPPLIER ||--o{ PRODUCT : supplies
+    SUPPLIER ||--o{ PURCHASE : provides
+    USER ||--o{ PURCHASE : records
+    PURCHASE ||--o{ PURCHASE_ITEM : includes
+    PRODUCT ||--o{ PURCHASE_ITEM : purchased
+
+    USER ||--o{ SALE : processes
+    SALE ||--o{ SALE_ITEM : contains
+    PRODUCT ||--o{ SALE_ITEM : sold
